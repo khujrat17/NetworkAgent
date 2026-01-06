@@ -9,10 +9,15 @@ namespace NetworkAgent
 {
     class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         static async Task Main(string[] args)
         {
             string machineName = Environment.MachineName;
-            string apiUrl = "https://localhost:44316/Network/PushStats";
+            string apiUrl = "https://localhost:44316/Network/PushStats";   // Update with your actual API endpoint
 
             Console.WriteLine("Starting Ethernet Monitor Agent for: " + machineName);
 
@@ -50,6 +55,7 @@ namespace NetworkAgent
                         RecordedAt = DateTime.Now
                     };
 
+
                     string json = JsonConvert.SerializeObject(data);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -60,6 +66,8 @@ namespace NetworkAgent
                         {
                             Console.WriteLine($"[{DateTime.Now}] NIC={nic.Name}, In={received} B, Out={sent} B");
                         }
+
+
                     }
                     catch (Exception ex)
                     {
@@ -67,7 +75,7 @@ namespace NetworkAgent
                     }
                 }
 
-                await Task.Delay(2000);
+                await Task.Delay(1000);
             }
         }
     }
